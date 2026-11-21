@@ -17,3 +17,17 @@ from guess_the_word import (
 def test_selected_word():
     assert select_word() in WORDS
     assert all(1 <= len(word) <= 7 for word in WORDS)
+
+
+    # A correct letter is revealed without spending a wrong guess.
+def test_correct_guess():
+    letter = validate_guess(" A ", [])
+    assert display_word("axle", [letter]) == "a _ _ _"
+    assert count_wrong_guesses("axle", [letter]) == 0
+
+
+# A valid but incorrect letter stays hidden and counts as one mistake.
+def test_incorrect_guess():
+    letter = validate_guess("z", [])
+    assert display_word("axle", [letter]) == "_ _ _ _"
+    assert count_wrong_guesses("axle", [letter]) == 1
