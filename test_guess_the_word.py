@@ -42,3 +42,15 @@ def test_repeated_letters():
 def test_letters_in_any_order():
     assert display_word("tire", ["e", "r"]) == "_ _ r e"
     assert display_word("tire", ["e", "r", "i", "t"]) == "t i r e"
+
+
+    # These rejected entries should never be added to the game's guess list.
+def test_invalid_guesses():
+    with pytest.raises(ValueError):
+        validate_guess("7", [])
+    with pytest.raises(ValueError):
+        validate_guess("", [])
+    with pytest.raises(ValueError):
+        validate_guess("ab", [])
+    with pytest.raises(ValueError):
+        validate_guess("A", ["a"])
