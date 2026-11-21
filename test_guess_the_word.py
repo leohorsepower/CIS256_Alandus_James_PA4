@@ -31,3 +31,14 @@ def test_incorrect_guess():
     letter = validate_guess("z", [])
     assert display_word("axle", [letter]) == "_ _ _ _"
     assert count_wrong_guesses("axle", [letter]) == 1
+
+
+    # One guess must reveal both occurrences of the same letter.
+def test_repeated_letters():
+    assert display_word("garage", ["a"]) == "_ a _ a _ _"
+
+
+# The display follows word order, even when guesses arrive backward.
+def test_letters_in_any_order():
+    assert display_word("tire", ["e", "r"]) == "_ _ r e"
+    assert display_word("tire", ["e", "r", "i", "t"]) == "t i r e"
